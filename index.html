@@ -402,10 +402,7 @@ body.show-emoji-picker em-emoji-picker {
     <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
     <!-- Linking custom script -->
     <script>
-        import express from "express";
-        import cors from "cors";
-        import dotenv from "dotenv";
-        import fetch from "node-fetch";
+     
         const chatBody = document.querySelector(".chat-body");
         const messageInput = document.querySelector(".message-input");
         const sendMessage = document.querySelector("#send-message");
@@ -415,12 +412,9 @@ body.show-emoji-picker em-emoji-picker {
         const chatbotToggler = document.querySelector("#chatbot-toggler");
         const closeChatbot = document.querySelector("#close-chatbot");
 
-        dotenv.config(); // Load environment variables
-
-
-export const Data_Terminal = process.env.Data_Terminal;
-export const DATA_SET = process.env.DATA_SET;
-
+        
+ const API_KEY = "AIzaSyCmNqPmeSXX3FP9dc9kTOePQIiquZLJZVo";
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
        
        
         // Initialize user message and file data
