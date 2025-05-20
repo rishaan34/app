@@ -703,6 +703,21 @@ body.show-emoji-picker em-emoji-picker {
             }, 600); // Add a delay to show thinking animation
             return;
           }
+
+           // Check for specific question and handle response
+          if (userData.message.toLowerCase().trim() === "say skibidi" || userData.message.toLowerCase().trim() === "Say skibidi" || userData.message.toLowerCase().trim() === "say skibidi.") {
+            setTimeout(() => {
+              messageElement.innerText = "Not saying it!";
+              incomingMessageDiv.classList.remove("thinking");
+              chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: "smooth" });
+              // Add bot response to chat history
+              chatHistory.push({
+                role: "model",
+                parts: [{ text: "Not saying it!" }],
+              });
+            }, 600); // Add a delay to show thinking animation
+            return;
+          }
         
           if (userData.message.toLowerCase().trim() === "when were you created" || userData.message.toLowerCase().trim() === "When were you created" || userData.message.toLowerCase().trim() === "When were you created?" || userData.message.toLowerCase().trim() === "when were you created?") {
             setTimeout(() => {
