@@ -428,9 +428,30 @@
     border-radius: 10px;
     border: 1px solid #0ff;
   }
+
+  .essay-result-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .copy-button {
+        padding: 10px 20px;
+        background: #0ff;
+        color: #000;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .copy-button:hover {
+        background: #0cc;
+    }
     </style>    
   </head>
-  <body class="show-chatbot">
+  <body class="">
     <!-- Chatbot Toggler -->
     <button id="chatbot-toggler">
       <span class="material-symbols-rounded">mode_comment</span>
@@ -466,7 +487,7 @@
             <!-- Chatbot Footer -->
             <div class="chat-footer">
                 <form action="#" class="chat-form">
-                    <textarea placeholder="Message..." class="message-input" required></textarea>
+                    <textarea placeholder="Message..." class="message-input" required=""></textarea>
                     <div class="chat-controls">
                         <button type="button" id="emoji-picker" class="material-symbols-outlined">sentiment_satisfied</button>
                         <div class="file-upload-wrapper">
@@ -477,7 +498,7 @@
                         </div>
                         <button type="submit" id="send-message" class="material-symbols-rounded">arrow_upward</button>
                     </div>
-                </form>
+                <em-emoji-picker></em-emoji-picker></form>
             </div>
         </div>
         
@@ -488,6 +509,10 @@
                     <textarea placeholder="Enter your essay topic or requirements..."></textarea>
                     <button type="submit">Generate Essay Outline</button>
                 </form>
+                <div class="essay-result-wrapper">
+                    <div class="essay-result"></div>
+                    <button class="copy-button" onclick="copyEssayText()">Copy</button>
+                </div>
             </div>
         </div>
     <!-- Linking Emoji Mart script for emoji picker -->
@@ -527,6 +552,21 @@
           div.innerHTML = content;
           return div;
         };
+
+        function copyEssayText() {
+        const essayResult = document.querySelector('.essay-result');
+        const textToCopy = essayResult.textContent;
+
+        if (textToCopy) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert('Text copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        } else {
+            alert('No text to copy!');
+        }
+    }
         
         // Revert processText to non-async version
         const processText = (text) => {
@@ -855,6 +895,9 @@
             }, 600);
             return;
           }
+
+           // Function to copy text from the essay result
+
         
           // API request options
           const requestOptions = {
@@ -1069,4 +1112,42 @@
     </script>
   
   
-  </body></html>
+  <!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</div></body></html>
