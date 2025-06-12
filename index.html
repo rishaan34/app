@@ -879,23 +879,7 @@
             return;
           }
         
-          // Add time-related response handler
-          if (userData.message.toLowerCase().includes('what') && 
-              userData.message.toLowerCase().includes('time')) {
-            setTimeout(() => {
-              const now = new Date();
-              const timeStr = now.toLocaleTimeString();
-              messageElement.innerText = `The current time is ${timeStr}.`;
-              incomingMessageDiv.classList.remove("thinking");
-              chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: "smooth" });
-              chatHistory.push({
-                role: "model",
-                parts: [{ text: `The current time is ${timeStr}.` }],
-              });
-            }, 600);
-            return;
-          }
-
+         
            // Function to copy text from the essay result
 
         
